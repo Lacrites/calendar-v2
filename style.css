@@ -44,6 +44,8 @@ body {
   position: relative;
 }
 
+/* SOLO gira cuando tiene la clase .unlocked */
+/* NO gira con hover */
 .card.unlocked .inner {
   transform: rotateY(180deg);
 }
@@ -66,7 +68,7 @@ body {
   color: white;
 }
 
-/* Reverso: número centrado */
+/* reverso: solo número */
 .back {
   background: rgba(255,255,255,0.08);
   backdrop-filter: blur(4px);
@@ -79,10 +81,9 @@ body {
   background-position: center;
 }
 
-/* Bloqueadas antes del día */
 .locked {
   opacity: 0.5;
   cursor: not-allowed;
   filter: grayscale(40%);
 }
- 
+
