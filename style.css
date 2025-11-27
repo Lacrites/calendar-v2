@@ -1,83 +1,75 @@
+/* --- Fondo general (estático) --- */
 body {
-  font-family: "Poppins", sans-serif;
-  background: linear-gradient(135deg, #2b1d45, #182a55, #0f3e5e); 
-  text-align: center;
-  padding: 20px;
-  color: #e8e8ff;
-}
-
-.title {
-  font-size: 24px;
-  margin-bottom: 20px;
-  font-weight: 600;
-  text-shadow: 0 0 8px #6ccaff;
-}
-
-#grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 18px;
-  width: fit-content;
-  margin: auto;
-}
-
-.card {
-  width: 60px;
-  height: 80px;
-  cursor: pointer;
-  perspective: 600px; /* Suavizado del 3D para evitar desplazamiento */
-}
-
-.inner {
-  width: 100%;
-  height: 100%;
-  transition: transform 0.7s ease;
-  transform-style: preserve-3d;
-  transform-origin: center; /* Evita el movimiento al girar */
-  position: relative;
-}
-
-.card.unlocked .inner {
-  transform: rotateY(180deg);
-}
-
-.front, .back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  box-sizing: border-box; /* Asegura mismo tamaño exacto */
-
-  border-radius: 10px;
-  border: 2px solid #7fd8ff;
-  box-shadow: 0 0 10px rgba(100, 200, 255, 0.4);
-
+  margin: 0;
+  padding: 0;
+  font-family: 'Verdana', sans-serif;
+  background: linear-gradient(135deg, #4b3ca7, #6bc7ff);
+  background-attachment: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
-
-  font-size: 28px;
-  font-weight: 600;
-  color: white;
+  height: 100vh;
 }
 
-/* Reverso con número */
-.back {
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(4px);
-  letter-spacing: 1px;
+/* --- Contenedor de cartas --- */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 60px);
+  gap: 15px;
+  padding: 20px;
 }
 
-/* Cara frontal (imagen del día) */
-.front {
+/* --- Carta base --- */
+.card {
+  width: 60px;
+  height: 80px;
+  perspective: 900px;
+  cursor: pointer;
+}
+
+/* --- Contenedor interno que rota --- */
+.card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 0.55s ease;
+  transform-style: preserve-3d;
+}
+
+/* --- Cuando está dada vuelta --- */
+.card.flipped .card-inner {
   transform: rotateY(180deg);
-  background-size: cover;
-  background-position: center;
 }
 
-/* Cartas bloqueadas */
-.locked {
-  opacity: 0.5;
-  cursor: not-allowed;
-  filter: grayscale(40%);
+/* --- Cara delantera --- */
+.card-front,
+.card-back {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  position: absolute;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* --- Frente: estilo más "lindo" navideño violeta/celeste/azul --- */
+.card-front {
+  background: linear-gradient(160deg, #5a47d5, #7ad3ff);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+}
+
+/* --- Dorso: solo el número centrado --- */
+.card-back {
+  transform: rotateY(180deg);
+  background: #fafaff;
+  color: #3c2c88;
+  font-size: 24px;
+  border: 2px solid #3c2c88;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.25);
 }
