@@ -1,17 +1,9 @@
 body {
   font-family: "Poppins", sans-serif;
-  background: linear-gradient(135deg, #2b1d45, #182a55, #0f3e5e);
-  background-size: 400% 400%;
-  animation: bgMove 18s ease infinite;
+  background: linear-gradient(135deg, #2b1d45, #182a55, #0f3e5e); 
   text-align: center;
   padding: 20px;
   color: #e8e8ff;
-}
-
-@keyframes bgMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
 }
 
 .title {
@@ -33,7 +25,7 @@ body {
   width: 60px;
   height: 80px;
   cursor: pointer;
-  perspective: 900px;
+  perspective: 600px; /* Suavizado del 3D para evitar desplazamiento */
 }
 
 .inner {
@@ -41,11 +33,10 @@ body {
   height: 100%;
   transition: transform 0.7s ease;
   transform-style: preserve-3d;
+  transform-origin: center; /* Evita el movimiento al girar */
   position: relative;
 }
 
-/* SOLO gira cuando tiene la clase .unlocked */
-/* NO gira con hover */
 .card.unlocked .inner {
   transform: rotateY(180deg);
 }
@@ -55,10 +46,12 @@ body {
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
+  box-sizing: border-box; /* Asegura mismo tamaño exacto */
 
   border-radius: 10px;
   border: 2px solid #7fd8ff;
   box-shadow: 0 0 10px rgba(100, 200, 255, 0.4);
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -68,22 +61,23 @@ body {
   color: white;
 }
 
-/* reverso: solo número */
+/* Reverso con número */
 .back {
   background: rgba(255,255,255,0.08);
   backdrop-filter: blur(4px);
   letter-spacing: 1px;
 }
 
+/* Cara frontal (imagen del día) */
 .front {
   transform: rotateY(180deg);
   background-size: cover;
   background-position: center;
 }
 
+/* Cartas bloqueadas */
 .locked {
   opacity: 0.5;
   cursor: not-allowed;
   filter: grayscale(40%);
 }
-
