@@ -12,12 +12,16 @@ for (let day = 1; day <= 25; day++) {
     const isUnlocked = day <= currentDay;
     const wasOpenedBefore = openedCards.includes(day);
 
-    if (wasOpenedBefore) card.classList.add("unlocked");
+    // Si ya estaba abierta previamente → la dejamos flipped
+    if (wasOpenedBefore) {
+        card.classList.add("unlocked");
+        card.classList.add("flipped");
+    }
 
     card.innerHTML = `
-        <div class="inner">
-            <div class="back ${isUnlocked ? "" : "locked"}">${day}</div>
-            <div class="front" style="background-image:url('img/${day}.png')"></div>
+        <div class="card-inner">
+            <div class="card-back ${isUnlocked ? "" : "locked"}">${day}</div>
+            <div class="card-front" style="background-image:url('img/${day}.png')"></div>
         </div>
     `;
 
@@ -27,11 +31,16 @@ for (let day = 1; day <= 25; day++) {
             return;
         }
 
-        card.classList.add("unlocked");
+        // Hacemos que gire o des-gire con click
+        card.classList.toggle("flipped");
 
+        // Guardar la apertura UNA sola vez
         if (!openedCards.includes(day)) {
             openedCards.push(day);
             localStorage.setItem("openedCards", JSON.stringify(openedCards));
+
+            // Marcamos como desbloqueada visualmente
+            card.classList.add("unlocked");
         }
     });
 
