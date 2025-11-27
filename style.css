@@ -6,24 +6,35 @@ body {
   background: linear-gradient(135deg, #4b3ca7, #6bc7ff);
   background-attachment: fixed;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+}
+
+/* --- Título --- */
+.title {
+  color: white;
+  font-size: 32px;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 /* --- Contenedor de cartas --- */
-.card-grid {
+/* 🔥 antes usabas .card-grid pero en el HTML es #grid */
+#grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, 60px);
   gap: 15px;
+  justify-content: center;
   padding: 20px;
+  max-width: 500px;
 }
 
 /* --- Carta base --- */
 .card {
   width: 60px;
   height: 80px;
-  perspective: 900px;
+  perspective: 600px; /* más suave, menos desplazamiento */
   cursor: pointer;
 }
 
@@ -34,6 +45,8 @@ body {
   position: relative;
   transition: transform 0.55s ease;
   transform-style: preserve-3d;
+  transform-origin: center; /* ⭐ evita que "se mueva" al girar */
+  box-sizing: border-box;
 }
 
 /* --- Cuando está dada vuelta --- */
@@ -41,7 +54,7 @@ body {
   transform: rotateY(180deg);
 }
 
-/* --- Cara delantera --- */
+/* --- Cara delantera y trasera --- */
 .card-front,
 .card-back {
   width: 100%;
@@ -49,22 +62,25 @@ body {
   border-radius: 8px;
   position: absolute;
   backface-visibility: hidden;
+  box-sizing: border-box; /* ⭐ evita desplazamientos */
+  
   display: flex;
   align-items: center;
   justify-content: center;
+
   font-size: 18px;
   font-weight: bold;
 }
 
-/* --- Frente: estilo más "lindo" navideño violeta/celeste/azul --- */
+/* --- Frente (imagen del día) --- */
 .card-front {
-  background: linear-gradient(160deg, #5a47d5, #7ad3ff);
-  color: white;
+  background-size: cover;
+  background-position: center;
   border: 2px solid rgba(255, 255, 255, 0.6);
   box-shadow: 0 3px 6px rgba(0,0,0,0.3);
 }
 
-/* --- Dorso: solo el número centrado --- */
+/* --- Dorso con número --- */
 .card-back {
   transform: rotateY(180deg);
   background: #fafaff;
@@ -72,4 +88,11 @@ body {
   font-size: 24px;
   border: 2px solid #3c2c88;
   box-shadow: 0 3px 6px rgba(0,0,0,0.25);
+}
+
+/* --- Cartas bloqueadas (futuras) --- */
+.locked {
+  opacity: 0.45;
+  filter: grayscale(60%);
+  pointer-events: none;
 }
