@@ -1,5 +1,5 @@
 const today = new Date();
-const currentDay = today.getDate(); 
+const currentDay = today.getDate();
 const grid = document.getElementById("grid");
 
 const openedCards = JSON.parse(localStorage.getItem("openedCards") || "[]");
@@ -13,15 +13,15 @@ for (let day = 1; day <= 25; day++) {
     const wasOpenedBefore = openedCards.includes(day);
 
     card.innerHTML = `
-        <div class="inner ${isUnlocked ? "" : "locked"} ${wasOpenedBefore ? "unlocked" : ""}">
-            <div class="back" style="background-image:url('img/back.png')"></div>
+        <div class="inner ${wasOpenedBefore ? "unlocked" : ""}">
+            <div class="back ${isUnlocked ? "" : "locked"}">${day}</div>
             <div class="front" style="background-image:url('img/${day}.png')"></div>
         </div>
     `;
 
     card.addEventListener("click", () => {
         if (!isUnlocked) {
-            alert("Todavía no podés abrir esta carta 🎁");
+            alert("Todavía no podés abrir esta carta 💫");
             return;
         }
 
