@@ -12,8 +12,10 @@ for (let day = 1; day <= 25; day++) {
     const isUnlocked = day <= currentDay;
     const wasOpenedBefore = openedCards.includes(day);
 
+    if (wasOpenedBefore) card.classList.add("unlocked");
+
     card.innerHTML = `
-        <div class="inner ${wasOpenedBefore ? "unlocked" : ""}">
+        <div class="inner">
             <div class="back ${isUnlocked ? "" : "locked"}">${day}</div>
             <div class="front" style="background-image:url('img/${day}.png')"></div>
         </div>
@@ -25,8 +27,7 @@ for (let day = 1; day <= 25; day++) {
             return;
         }
 
-        const inner = card.querySelector(".inner");
-        inner.classList.add("unlocked");
+        card.classList.add("unlocked");
 
         if (!openedCards.includes(day)) {
             openedCards.push(day);
