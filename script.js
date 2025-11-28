@@ -30,7 +30,7 @@ for (let day = 1; day <= 25; day++) {
     card.innerHTML = `
         <div class="card-inner">
             <div class="card-back ${isUnlocked ? "" : "locked"}">${day}</div>
-            <div class="card-front" style="background-image:url('img/${day}.png')"></div>
+            <div class="card-front" style="background-image:url('${day}.png')"></div>
         </div>
     `;
 
