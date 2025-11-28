@@ -35,6 +35,7 @@ body {
   height: 80px;
   perspective: 600px;
   cursor: pointer;
+  position: relative;  /* ⭐ NECESARIO para estabilizar rotación */
 }
 
 /* --- Contenedor interno que rota --- */
@@ -44,7 +45,7 @@ body {
   position: relative;
   transition: transform 0.55s ease;
   transform-style: preserve-3d;
-  transform-origin: center;
+  transform-origin: center center;
   box-sizing: border-box;
 }
 
@@ -53,20 +54,21 @@ body {
   transform: rotateY(180deg);
 }
 
-/* --- Ambas caras --- */
+/* --- Ambas caras (alineación perfecta) --- */
 .card-front,
 .card-back {
+  position: absolute;
+  inset: 0; /* ⭐ garantiza que NO se muevan al rotar */
   width: 100%;
   height: 100%;
   border-radius: 8px;
-  position: absolute;
   backface-visibility: hidden;
   box-sizing: border-box;
 
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden; /* ⭐ para que la imagen back no sobresalga */
+  overflow: hidden;
 }
 
 /* --- Frente (imagen del día) --- */
@@ -77,28 +79,26 @@ body {
   box-shadow: 0 3px 6px rgba(0,0,0,0.3);
 }
 
-/* --- Dorso con imagen y número encima --- */
+/* --- Dorso con imagen y número --- */
 .card-back {
   transform: rotateY(180deg);
   border: 2px solid #3c2c88;
   background: #fafaff;
   box-shadow: 0 3px 6px rgba(0,0,0,0.25);
-  position: relative;
 }
 
 /* Imagen del dorso */
 .card-back .back-image {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   opacity: 1;
   pointer-events: none;
-  position: absolute;
-  top: 0;
-  left: 0;
 }
 
-/* Número encima del dorso */
+/* Número del día encima */
 .card-back .day-number {
   position: relative;
   z-index: 10;
