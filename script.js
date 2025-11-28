@@ -10,11 +10,7 @@ for (let day = 1; day <= 25; day++) {
     const card = document.createElement("div");
     card.className = "card";
 
-    // ---------------------------
-    // 🔒 MODO REAL:
-    // Solo el 1 de diciembre está desbloqueado.
-    // El resto se desbloqueará recién cuando sea diciembre y el día corresponda.
-    // ---------------------------
+    // 🔒 MODO REAL: solo el 1 de diciembre abierto por ahora
     const isUnlocked =
         (day === 1) ||                                   // Día 1 siempre abierto
         (currentMonth === 11 && day <= currentDay);      // Diciembre real
@@ -27,9 +23,7 @@ for (let day = 1; day <= 25; day++) {
         card.classList.add("flipped");
     }
 
-    // ---------------------------
-    // HTML con imagen de fondo del dorso + número arriba
-    // ---------------------------
+    // HTML con dorso con imagen + número, frente con imagen del día
     card.innerHTML = `
         <div class="card-inner">
             <div class="card-back ${isUnlocked ? "" : "locked"}">
@@ -40,7 +34,7 @@ for (let day = 1; day <= 25; day++) {
         </div>
     `;
 
-    // Manejo del click
+    // Manejo del click: flip / unflip
     card.addEventListener("click", () => {
         if (!isUnlocked) {
             alert("Todavía no podés abrir esta carta 💫");
