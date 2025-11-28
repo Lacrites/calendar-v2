@@ -34,7 +34,7 @@ for (let day = 1; day <= 25; day++) {
         <div class="card-inner">
             <div class="card-back ${isUnlocked ? "" : "locked"}">
                 <img class="back-image" src="back.png" alt="back">
-                <span class="day-number">${day}</span>
+                <div class="day-number">${day}</div>
             </div>
             <div class="card-front" style="background-image:url('${day}.png')"></div>
         </div>
