@@ -1,18 +1,27 @@
 const today = new Date();
 const currentDay = today.getDate();
+const currentMonth = today.getMonth(); // 11 = diciembre
 const grid = document.getElementById("grid");
 
 const openedCards = JSON.parse(localStorage.getItem("openedCards") || "[]");
 
 for (let day = 1; day <= 25; day++) {
-    
+
     const card = document.createElement("div");
     card.className = "card";
 
-    const isUnlocked = day <= currentDay;
+    // ---------------------------
+    // 🔒 MODO REAL:
+    // Solo el 1 de diciembre está desbloqueado.
+    // El resto se desbloqueará recién cuando sea diciembre y el día corresponda.
+    // ---------------------------
+    const isUnlocked =
+        (day === 1) ||                                   // Día 1 siempre disponible (modo real)
+        (currentMonth === 11 && day <= currentDay);      // Diciembre: desbloqueo progresivo
+
     const wasOpenedBefore = openedCards.includes(day);
 
-    // Si ya estaba abierta previamente → la dejamos flipped
+    // Si ya estaba abierta previamente → queda flipped
     if (wasOpenedBefore) {
         card.classList.add("unlocked");
         card.classList.add("flipped");
@@ -31,15 +40,13 @@ for (let day = 1; day <= 25; day++) {
             return;
         }
 
-        // Hacemos que gire o des-gire con click
+        // Dar vuelta o des-dar vuelta con click
         card.classList.toggle("flipped");
 
-        // Guardar la apertura UNA sola vez
+        // Guardar apertura UNA sola vez
         if (!openedCards.includes(day)) {
             openedCards.push(day);
             localStorage.setItem("openedCards", JSON.stringify(openedCards));
-
-            // Marcamos como desbloqueada visualmente
             card.classList.add("unlocked");
         }
     });
