@@ -37,7 +37,7 @@ for (let day = 1; day <= 25; day++) {
     // Manejo del click: flip / unflip
     card.addEventListener("click", () => {
         if (!isUnlocked) {
-            alert("Todavía no podés abrir esta carta 💫");
+            alert("No te apures");
             return;
         }
 
