@@ -58,7 +58,7 @@ body {
 .card-front,
 .card-back {
   position: absolute;
-  inset: 0; /* ⭐ garantiza que NO se muevan al rotar */
+  inset: 0; /* ⭐ garantiza que NO se muevan al girar */
   width: 100%;
   height: 100%;
   border-radius: 8px;
@@ -113,4 +113,29 @@ body {
   opacity: 0.4;
   filter: grayscale(60%);
   pointer-events: none;
+}
+
+/* --- MEDIA QUERY: Ajuste para móviles --- */
+@media (max-width: 480px) {
+  #grid {
+    grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+    gap: 10px;
+    padding: 10px;
+    max-width: 95vw; /* se adapta al ancho de pantalla */
+  }
+
+  .card {
+    width: 100%;                  /* ocupa todo el espacio del grid cell */
+    height: calc(100% * 4/3);     /* mantiene proporción 60x80 ≈ 3:4 */
+  }
+
+  .card-front,
+  .card-back {
+    border-radius: 6px;
+    font-size: 16px;
+  }
+
+  .card-back .day-number {
+    font-size: 18px;
+  }
 }
